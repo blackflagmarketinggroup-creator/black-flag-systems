@@ -210,7 +210,7 @@ function CommandBridgeNav() {
             }}
           >
             <Image
-              src="/jolly-roger.png"
+              src="/Skull & Cross Swords.png"
               alt="Black Flag Systems"
               width={40}
               height={40}
@@ -902,7 +902,7 @@ function TheHorizon() {
                   }}
                 >
                   <Image
-                    src="/jolly-roger.png"
+                    src="/Skull & Cross Swords.png"
                     alt="Black Flag Systems"
                     width={36}
                     height={36}
