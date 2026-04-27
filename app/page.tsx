@@ -14,6 +14,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import ContactModal from "@/components/ContactModal";
 
 // ── Shared style constants ────────────────────────────────────────────────────
 const CARD_BASE: React.CSSProperties = {
@@ -140,7 +141,7 @@ function SectionLabel({ eyebrow, title }: { eyebrow: string; title: string }) {
 }
 
 // ── CommandBridgeNav ──────────────────────────────────────────────────────────
-function CommandBridgeNav() {
+function CommandBridgeNav({ onContact }: { onContact: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -251,17 +252,16 @@ function CommandBridgeNav() {
             </a>
           ))}
           <div className="px-6 py-4">
-            <a
-              href="#provisions"
-              className="block text-center font-cinzel text-xs tracking-[0.2em] py-3 px-6"
+            <button
+              className="block w-full text-center font-cinzel text-xs tracking-[0.2em] py-3 px-6"
               style={{
                 border: "1px solid rgba(124,58,237,0.5)",
                 color: "rgba(245,245,241,0.9)",
               }}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => { setMenuOpen(false); onContact(); }}
             >
               BOARD NOW
-            </a>
+            </button>
           </div>
         </div>
       )}
@@ -270,7 +270,7 @@ function CommandBridgeNav() {
 }
 
 // ── OpeningSalvo (Hero) ───────────────────────────────────────────────────────
-function OpeningSalvo() {
+function OpeningSalvo({ onContact }: { onContact: () => void }) {
   return (
     <section
       id="hero"
@@ -368,8 +368,8 @@ function OpeningSalvo() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="#provisions"
+          <button
+            onClick={onContact}
             className="group relative inline-flex items-center gap-2 font-cinzel text-sm tracking-[0.2em] font-bold px-10 py-4 transition-all duration-300"
             style={{
               background:
@@ -378,6 +378,7 @@ function OpeningSalvo() {
               boxShadow:
                 "0 0 30px rgba(124,58,237,0.25), inset 0 1px 0 rgba(255,255,255,0.08)",
               color: "#F5F5F1",
+              cursor: "pointer",
             }}
           >
             <Sword size={14} />
@@ -386,7 +387,7 @@ function OpeningSalvo() {
               size={14}
               className="transition-transform duration-200 group-hover:translate-x-1"
             />
-          </a>
+          </button>
           <a
             href="#results"
             className="inline-flex items-center gap-2 font-cinzel text-sm tracking-[0.2em] font-bold px-10 py-4 transition-all duration-200"
@@ -664,7 +665,7 @@ function BountyBoard() {
 }
 
 // ── ResourceAllocation (Pricing) ──────────────────────────────────────────────
-function ResourceAllocation() {
+function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }) {
   const tiers = [
     {
       vessel: "SLOOP",
@@ -824,9 +825,9 @@ function ResourceAllocation() {
               </ul>
 
               {/* CTA */}
-              <a
-                href="#contact"
-                className="block text-center font-cinzel text-xs tracking-[0.22em] font-bold py-4 px-6 transition-all duration-200"
+              <button
+                onClick={() => onContact(tier.name)}
+                className="block w-full text-center font-cinzel text-xs tracking-[0.22em] font-bold py-4 px-6 transition-all duration-200"
                 style={
                   tier.highlight
                     ? {
@@ -835,10 +836,12 @@ function ResourceAllocation() {
                         border: "1px solid rgba(124,58,237,0.6)",
                         color: "#F5F5F1",
                         boxShadow: "0 0 20px rgba(124,58,237,0.2)",
+                        cursor: "pointer",
                       }
                     : {
                         border: "1px solid rgba(245,245,241,0.2)",
                         color: "rgba(245,245,241,0.7)",
+                        cursor: "pointer",
                       }
                 }
                 onMouseEnter={(e) => {
@@ -857,7 +860,7 @@ function ResourceAllocation() {
                 }}
               >
                 {tier.cta}
-              </a>
+              </button>
             </div>
           ))}
         </div>
@@ -875,7 +878,7 @@ function ResourceAllocation() {
 }
 
 // ── TheHorizon (Footer) ───────────────────────────────────────────────────────
-function TheHorizon() {
+function TheHorizon({ onContact }: { onContact: () => void }) {
   return (
     <footer className="relative" style={{ borderTop: "1px solid rgba(124,58,237,0.15)" }}>
       <div className="absolute top-0 inset-x-0 h-px" style={DIVIDER} />
@@ -959,20 +962,20 @@ function TheHorizon() {
                   Contact
                 </div>
                 {["hello@blackflagsystems.com", "Schedule a Call"].map((item) => (
-                  <a
+                  <button
                     key={item}
-                    href="#contact"
-                    className="block font-sans text-sm mb-3 transition-colors duration-200"
-                    style={{ color: "rgba(245,245,241,0.4)" }}
+                    onClick={onContact}
+                    className="block font-sans text-sm mb-3 transition-colors duration-200 text-left"
+                    style={{ color: "rgba(245,245,241,0.4)", cursor: "pointer", background: "none", border: "none", padding: 0 }}
                     onMouseEnter={(e) =>
-                      ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.75)")
+                      ((e.currentTarget as HTMLElement).style.color = "rgba(245,245,241,0.75)")
                     }
                     onMouseLeave={(e) =>
-                      ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.4)")
+                      ((e.currentTarget as HTMLElement).style.color = "rgba(245,245,241,0.4)")
                     }
                   >
                     {item}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -1028,12 +1031,25 @@ function TheHorizon() {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function Page() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTier, setModalTier] = useState("");
+
+  const openModal = (tier = "") => {
+    setModalTier(tier);
+    setModalOpen(true);
+  };
+
   return (
     <main style={{ background: "#050505" }}>
-      <CommandBridgeNav />
-      <OpeningSalvo />
+      <ContactModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        defaultTier={modalTier}
+      />
 
-      {/* Section divider */}
+      <CommandBridgeNav onContact={() => openModal()} />
+      <OpeningSalvo onContact={() => openModal()} />
+
       <div className="max-w-5xl mx-auto px-6">
         <div style={DIVIDER} />
       </div>
@@ -1050,9 +1066,9 @@ export default function Page() {
         <div style={DIVIDER} />
       </div>
 
-      <ResourceAllocation />
+      <ResourceAllocation onContact={(tier) => openModal(tier)} />
 
-      <TheHorizon />
+      <TheHorizon onContact={() => openModal()} />
     </main>
   );
 }
