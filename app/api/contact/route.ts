@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { NextRequest } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase";
 
 const TO_EMAIL = "blackflagmarketinggroup@gmail.com"; // Matches Resend account email — switch to Max@blackflagsystems.dev after domain verified
 const FROM_EMAIL = "onboarding@resend.dev";
@@ -18,6 +19,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // ── Save lead to Supabase ─────────────────────────────────────────────────
+    const { error: dbError } = await supabaseAdmin.from("leads").insert({
+      name,
+      email,
+      phone: phone || null,
+      company: company || null,
+      tier: tier || null,
+      message,
+      status: "new",
+    });
+
+    if (dbError) {
+      console.error("Supabase insert error:", dbError);
+      // Don't block the email — log and continue
+    }
+
+    // ── Send email via Resend ─────────────────────────────────────────────────
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
