@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { NextRequest } from "next/server";
 
-const TO_EMAIL = "Blackflagmarketinggroup@gmail.com";
+const TO_EMAIL = "maxclark114@gmail.com"; // Switch to Max@blackflagsystems.dev after verifying domain in Resend
 const FROM_EMAIL = "onboarding@resend.dev";
 
 export async function POST(request: NextRequest) {
