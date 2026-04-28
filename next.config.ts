@@ -10,5 +10,5 @@ export default withSentryConfig(nextConfig, {
   project: "black-flag-systems",
   silent: true,
   widenClientFileUpload: true,
-  hideSourceMaps: true,
+  sourcemaps: { disable: true },
 });
