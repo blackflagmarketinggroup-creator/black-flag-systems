@@ -668,7 +668,6 @@ function BountyBoard() {
 function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }) {
   const tiers = [
     {
-      vessel: "SLOOP",
       name: "RECON",
       icon: <Crosshair size={20} />,
       price: "From $2,500",
@@ -686,7 +685,6 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
       highlight: false,
     },
     {
-      vessel: "FRIGATE",
       name: "VANGUARD",
       icon: <Sword size={20} />,
       price: "From $5,500",
@@ -707,21 +705,22 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
       highlight: true,
     },
     {
-      vessel: "MAN-O'-WAR",
       name: "ARCHITECT",
       icon: <Skull size={20} />,
       price: "Custom",
       period: "engagement",
-      description: "Full-fleet deployment. For enterprises demanding total revenue system architecture.",
+      description: "Pick your weapons. Built for individuals who need 1 or 2 precision systems deployed — no full retainer required.",
       features: [
-        "Everything in VANGUARD",
-        "Dedicated automation engineer",
-        "Custom AI model training",
-        "Full revenue system architecture",
-        "White-glove onboarding",
-        "Unlimited campaigns",
-        "Quarterly strategy summits",
-        "Direct access to founders",
+        "Automated Lead Funnel",
+        "Social Media Content Engine",
+        "Email & Notification Systems",
+        "CRM Pipeline Automation",
+        "Reputation & Review Management",
+        "AI Appointment Setter",
+        "Reporting & Analytics Dashboards",
+        "Missed Call Text-Back",
+        "AI Chat Assistant",
+        "Invoice & Payment Follow-Up",
       ],
       cta: "REQUEST INTEL",
       highlight: false,
@@ -738,7 +737,7 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
       }}
     >
       <div className="max-w-6xl mx-auto px-6">
-        <SectionLabel eyebrow="CHOOSE YOUR VESSEL" title="PROVISIONS" />
+        <SectionLabel eyebrow="CHOOSE YOUR ENGAGEMENT" title="PROVISIONS" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
           {tiers.map((tier) => (
@@ -763,9 +762,9 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
                 </div>
               )}
 
-              {/* Vessel class */}
+              {/* Tier icon */}
               <div
-                className="font-mono text-[10px] tracking-[0.35em] uppercase mb-4 flex items-center gap-2"
+                className="mb-4 flex items-center gap-2"
                 style={{
                   color: tier.highlight
                     ? "rgba(124,58,237,0.9)"
@@ -773,7 +772,6 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
                 }}
               >
                 {tier.icon}
-                {tier.vessel}
               </div>
 
               {/* Tier name */}
@@ -923,9 +921,16 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
                 className="font-sans text-sm text-center md:text-left leading-relaxed"
                 style={{ color: "rgba(245,245,241,0.35)" }}
               >
-                AI Automation & Digital Growth.<br />
+                AI Automation & Digital System Development.<br />
                 No quarter given on results.
               </p>
+              <div
+                className="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] uppercase"
+                style={{ color: "rgba(124,58,237,0.6)" }}
+              >
+                <span>★</span>
+                <span>Veteran Owned Company</span>
+              </div>
             </div>
 
             {/* Nav columns */}
@@ -961,7 +966,7 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
                 >
                   Contact
                 </div>
-                {["hello@blackflagsystems.com", "Schedule a Call"].map((item) => (
+                {["Hello@blackflagsystems.dev", "Schedule a Call"].map((item) => (
                   <button
                     key={item}
                     onClick={onContact}

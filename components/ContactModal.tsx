@@ -9,7 +9,7 @@ interface ContactModalProps {
   defaultTier?: string;
 }
 
-const TIERS = ["RECON — Sloop", "VANGUARD — Frigate", "ARCHITECT — Man-O'-War", "Not sure yet"];
+const TIERS = ["RECON", "VANGUARD", "ARCHITECT", "Not sure yet"];
 
 const INPUT_STYLE: React.CSSProperties = {
   width: "100%",
