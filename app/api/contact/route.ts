@@ -2,8 +2,8 @@ import { Resend } from "resend";
 import { NextRequest } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 
-const TO_EMAIL = "blackflagmarketinggroup@gmail.com"; // Matches Resend account email — switch to Max@blackflagsystems.dev after domain verified
-const FROM_EMAIL = "onboarding@resend.dev";
+const TO_EMAIL = "max@blackflagsystems.dev";
+const FROM_EMAIL = "Black Flag Systems <no-reply@blackflagsystems.dev>";
 
 export async function POST(request: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
