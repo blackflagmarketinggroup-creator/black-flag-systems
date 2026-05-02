@@ -1020,24 +1020,6 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
               </span>
             </div>
 
-        {/* Copyright + Legal */}
-<div className="flex items-center gap-4">
-  <div
-    className="font-mono text-[10px] tracking-[0.2em] uppercase"
-    style={{ color: "rgba(245,245,241,0.2)" }}
-  >
-    © {new Date().getFullYear()} Black Flag Systems. All rights reserved.
-  </div>
-  <a
-    href="/privacy"
-    className="font-mono text-[10px] tracking-[0.2em] uppercase transition-colors duration-200"
-    style={{ color: "rgba(245,245,241,0.2)" }}
-    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.5)")}
-    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.2)")}
-  >
-    Privacy Policy
-  </a>
-</div>
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function Page() {
