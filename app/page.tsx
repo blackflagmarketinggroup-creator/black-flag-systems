@@ -1028,7 +1028,7 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
   >
     © {new Date().getFullYear()} Black Flag Systems. All rights reserved.
   </div>
-  
+  <a
     href="/privacy"
     className="font-mono text-[10px] tracking-[0.2em] uppercase transition-colors duration-200"
     style={{ color: "rgba(245,245,241,0.2)" }}
