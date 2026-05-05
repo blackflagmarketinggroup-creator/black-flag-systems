@@ -670,7 +670,7 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
     {
       name: "RECON",
       icon: <Crosshair size={20} />,
-      price: "From $2,500",
+      price: "From $1,500",
       period: "/month",
       description: "For companies ready to weaponize their first automated revenue channel.",
       features: [
@@ -687,7 +687,7 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
     {
       name: "VANGUARD",
       icon: <Sword size={20} />,
-      price: "From $5,500",
+      price: "From $3,000",
       period: "/month",
       badge: "MOST PLUNDERED",
       description: "For growth-stage companies ready to dominate multiple channels simultaneously.",
