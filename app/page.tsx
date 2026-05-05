@@ -108,7 +108,7 @@ function StatCounter({
       {sublabel && (
         <div
           className="font-mono text-xs tracking-[0.15em] uppercase"
-          style={{ color: "rgba(245,245,241,0.4)" }}
+          style={{ color: "rgba(245,245,241,0.65)" }}
         >
           {sublabel}
         </div>
@@ -124,8 +124,8 @@ function SectionLabel({ eyebrow, title }: { eyebrow: string; title: string }) {
       <div
         className="inline-block font-mono text-xs tracking-[0.35em] uppercase mb-4 px-3 py-1"
         style={{
-          color: "rgba(124,58,237,0.8)",
-          border: "1px solid rgba(124,58,237,0.25)",
+          color: "rgba(124,58,237,0.95)",
+          border: "1px solid rgba(124,58,237,0.45)",
         }}
       >
         {eyebrow}
@@ -176,12 +176,12 @@ function CommandBridgeNav({ onContact }: { onContact: () => void }) {
               key={link.label}
               href={link.href}
               className="font-mono text-xs tracking-[0.22em] transition-colors duration-200"
-              style={{ color: "rgba(245,245,241,0.5)" }}
+              style={{ color: "rgba(245,245,241,0.72)" }}
               onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.9)")
+                ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.98)")
               }
               onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.5)")
+                ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.72)")
               }
             >
               {link.label}
@@ -310,7 +310,7 @@ function OpeningSalvo({ onContact }: { onContact: () => void }) {
         {/* Pre-headline label */}
         <div
           className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.35em] uppercase mb-10"
-          style={{ color: "rgba(124,58,237,0.75)" }}
+          style={{ color: "rgba(124,58,237,0.95)" }}
         >
           <div
             className="w-1.5 h-1.5 rounded-full"
@@ -356,7 +356,7 @@ function OpeningSalvo({ onContact }: { onContact: () => void }) {
         {/* Sub-headline */}
         <p
           className="font-sans text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
-          style={{ color: "rgba(245,245,241,0.55)" }}
+          style={{ color: "rgba(245,245,241,0.78)" }}
         >
           <Wind
             size={16}
@@ -413,7 +413,7 @@ function OpeningSalvo({ onContact }: { onContact: () => void }) {
         {/* Scroll hint */}
         <div
           className="mt-20 flex flex-col items-center gap-2"
-          style={{ color: "rgba(245,245,241,0.2)" }}
+          style={{ color: "rgba(245,245,241,0.5)" }}
         >
           <div
             className="w-px h-14"
@@ -512,7 +512,7 @@ function TheHold() {
               {/* Tag */}
               <div
                 className="font-mono text-[10px] tracking-[0.3em] uppercase mb-3"
-                style={{ color: "rgba(124,58,237,0.6)" }}
+                style={{ color: "rgba(124,58,237,0.88)" }}
               >
                 {cap.tag}
               </div>
@@ -528,7 +528,7 @@ function TheHold() {
               {/* Description */}
               <p
                 className="font-sans text-sm leading-relaxed"
-                style={{ color: "rgba(245,245,241,0.5)" }}
+                style={{ color: "rgba(245,245,241,0.72)" }}
               >
                 {cap.description}
               </p>
@@ -640,7 +640,7 @@ function BountyBoard() {
         <div className="text-center max-w-3xl mx-auto">
           <div
             className="font-mono text-[11px] tracking-[0.3em] uppercase mb-6"
-            style={{ color: "rgba(124,58,237,0.55)" }}
+            style={{ color: "rgba(124,58,237,0.88)" }}
           >
             — Field Report —
           </div>
@@ -654,7 +654,7 @@ function BountyBoard() {
           </blockquote>
           <cite
             className="font-mono text-xs tracking-[0.25em] not-italic"
-            style={{ color: "rgba(245,245,241,0.35)" }}
+            style={{ color: "rgba(245,245,241,0.65)" }}
           >
             DIRECTOR OF GROWTH — SERIES B SAAS
           </cite>
@@ -792,13 +792,13 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
                 </span>
                 <span
                   className="font-mono text-xs ml-1"
-                  style={{ color: "rgba(245,245,241,0.35)" }}
+                  style={{ color: "rgba(245,245,241,0.62)" }}
                 >
                   {tier.period}
                 </span>
                 <p
                   className="font-sans text-sm mt-3 leading-relaxed"
-                  style={{ color: "rgba(245,245,241,0.45)" }}
+                  style={{ color: "rgba(245,245,241,0.72)" }}
                 >
                   {tier.description}
                 </p>
@@ -810,7 +810,7 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
                   <li
                     key={feature}
                     className="flex items-start gap-3 font-sans text-sm"
-                    style={{ color: "rgba(245,245,241,0.65)" }}
+                    style={{ color: "rgba(245,245,241,0.82)" }}
                   >
                     <Check
                       size={14}
@@ -866,7 +866,7 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
         {/* Fine print */}
         <p
           className="text-center font-mono text-[11px] tracking-[0.2em] mt-10"
-          style={{ color: "rgba(245,245,241,0.22)" }}
+          style={{ color: "rgba(245,245,241,0.58)" }}
         >
           ALL ENGAGEMENTS BEGIN WITH A STRATEGY CALL. NO QUARTER GIVEN ON RESULTS.
         </p>
@@ -919,14 +919,14 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
               </div>
               <p
                 className="font-sans text-sm text-center md:text-left leading-relaxed"
-                style={{ color: "rgba(245,245,241,0.35)" }}
+                style={{ color: "rgba(245,245,241,0.65)" }}
               >
                 AI Automation & Digital System Development.<br />
                 No quarter given on results.
               </p>
               <div
-                className="flex items-center gap-2 font-mono text-[10px] tracking-[0.25em] uppercase"
-                style={{ color: "rgba(124,58,237,0.6)" }}
+                className="flex items-center gap-2 font-mono text-xs tracking-[0.18em] uppercase font-bold"
+                style={{ animation: "pulse-purple 2.4s ease-in-out infinite" }}
               >
                 <span>★</span>
                 <span>Veteran Owned Company</span>
@@ -938,7 +938,7 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
               <div>
                 <div
                   className="font-mono text-[10px] tracking-[0.3em] uppercase mb-5"
-                  style={{ color: "rgba(124,58,237,0.6)" }}
+                  style={{ color: "rgba(124,58,237,0.88)" }}
                 >
                   Navigation
                 </div>
@@ -947,12 +947,12 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
                     key={item}
                     href={`#${item.toLowerCase()}`}
                     className="block font-sans text-sm mb-3 transition-colors duration-200"
-                    style={{ color: "rgba(245,245,241,0.4)" }}
+                    style={{ color: "rgba(245,245,241,0.68)" }}
                     onMouseEnter={(e) =>
-                      ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.75)")
+                      ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.95)")
                     }
                     onMouseLeave={(e) =>
-                      ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.4)")
+                      ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.68)")
                     }
                   >
                     {item}
@@ -962,7 +962,7 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
               <div>
                 <div
                   className="font-mono text-[10px] tracking-[0.3em] uppercase mb-5"
-                  style={{ color: "rgba(124,58,237,0.6)" }}
+                  style={{ color: "rgba(124,58,237,0.88)" }}
                 >
                   Contact
                 </div>
@@ -971,12 +971,12 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
                     key={item}
                     onClick={onContact}
                     className="block font-sans text-sm mb-3 transition-colors duration-200 text-left"
-                    style={{ color: "rgba(245,245,241,0.4)", cursor: "pointer", background: "none", border: "none", padding: 0 }}
+                    style={{ color: "rgba(245,245,241,0.68)", cursor: "pointer", background: "none", border: "none", padding: 0 }}
                     onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(245,245,241,0.75)")
+                      ((e.currentTarget as HTMLElement).style.color = "rgba(245,245,241,0.95)")
                     }
                     onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(245,245,241,0.4)")
+                      ((e.currentTarget as HTMLElement).style.color = "rgba(245,245,241,0.68)")
                     }
                   >
                     {item}
@@ -1004,7 +1004,7 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
               />
               <span
                 className="font-mono text-[11px] tracking-[0.25em] uppercase"
-                style={{ color: "rgba(124,58,237,0.8)" }}
+                style={{ color: "rgba(124,58,237,0.95)" }}
               >
                 SYSTEM STATUS: OPERATIONAL
               </span>
@@ -1014,7 +1014,7 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
               />
               <span
                 className="font-cinzel text-[11px] tracking-[0.2em] font-bold"
-                style={{ color: "rgba(245,245,241,0.55)" }}
+                style={{ color: "rgba(245,245,241,0.78)" }}
               >
                 THE WIND IS AT OUR BACK.
               </span>
@@ -1024,20 +1024,20 @@ function TheHorizon({ onContact }: { onContact: () => void }) {
             <div className="flex items-center gap-4">
               <span
                 className="font-mono text-[11px] tracking-[0.18em]"
-                style={{ color: "rgba(245,245,241,0.22)" }}
+                style={{ color: "rgba(245,245,241,0.58)" }}
               >
                 © {new Date().getFullYear()} BLACK FLAG SYSTEMS. ALL RIGHTS RESERVED.
               </span>
-              <span style={{ color: "rgba(124,58,237,0.3)" }}>·</span>
+              <span style={{ color: "rgba(124,58,237,0.55)" }}>·</span>
               <a
                 href="/privacy"
                 className="font-mono text-[11px] tracking-[0.18em] transition-colors duration-200"
-                style={{ color: "rgba(245,245,241,0.22)" }}
+                style={{ color: "rgba(245,245,241,0.58)" }}
                 onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.55)")
+                  ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.95)")
                 }
                 onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.22)")
+                  ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.58)")
                 }
               >
                 PRIVACY POLICY
