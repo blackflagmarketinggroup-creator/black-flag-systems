@@ -1,53 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import {
   Sword,
-  Skull,
   Anchor,
   Compass,
   Wind,
   Crosshair,
-  Menu,
-  X,
-  Check,
   ChevronRight,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import ContactModal from "@/components/ContactModal";
-
-// ── Shared style constants ────────────────────────────────────────────────────
-const CARD_BASE: React.CSSProperties = {
-  background: "rgba(18, 3, 33, 0.55)",
-  backdropFilter: "blur(14px) saturate(160%)",
-  WebkitBackdropFilter: "blur(14px) saturate(160%)",
-  border: "1px solid rgba(124, 58, 237, 0.28)",
-  boxShadow:
-    "0 0 24px rgba(124,58,237,0.08), inset 0 1px 0 rgba(245,245,241,0.04)",
-};
-
-const CARD_VANGUARD: React.CSSProperties = {
-  background: "rgba(18, 3, 33, 0.65)",
-  backdropFilter: "blur(18px) saturate(200%)",
-  WebkitBackdropFilter: "blur(18px) saturate(200%)",
-  border: "1px solid rgba(124, 58, 237, 0.65)",
-  boxShadow:
-    "0 0 60px rgba(124,58,237,0.28), 0 0 120px rgba(124,58,237,0.10), inset 0 0 40px rgba(124,58,237,0.04), inset 0 1px 0 rgba(245,245,241,0.06)",
-};
-
-const DIVIDER: React.CSSProperties = {
-  height: "1px",
-  background:
-    "linear-gradient(90deg, transparent, rgba(124,58,237,0.3) 30%, rgba(124,58,237,0.3) 70%, transparent)",
-};
-
-const METALLIC_TEXT: React.CSSProperties = {
-  background:
-    "linear-gradient(180deg, #F5F5F1 0%, rgba(220,210,240,0.9) 50%, rgba(245,245,241,0.75) 100%)",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-};
+import { CARD_BASE, DIVIDER, METALLIC_TEXT } from "@/components/siteStyles";
+import SiteShell from "@/components/SiteShell";
+import { useContact } from "@/components/ContactContext";
 
 // ── StatCounter ───────────────────────────────────────────────────────────────
 function StatCounter({
@@ -140,137 +104,9 @@ function SectionLabel({ eyebrow, title }: { eyebrow: string; title: string }) {
   );
 }
 
-// ── CommandBridgeNav ──────────────────────────────────────────────────────────
-function CommandBridgeNav({ onContact }: { onContact: () => void }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const navLinks = [
-    { label: "CAPABILITIES", href: "#capabilities" },
-    { label: "RESULTS", href: "#results" },
-    { label: "PROVISIONS", href: "#provisions" },
-  ];
-
-  return (
-    <nav
-      className="fixed top-0 inset-x-0 z-50 transition-all duration-300"
-      style={{
-        background: scrolled ? "rgba(5,5,5,0.96)" : "rgba(5,5,5,0.72)",
-        backdropFilter: "blur(18px) saturate(180%)",
-        WebkitBackdropFilter: "blur(18px) saturate(180%)",
-        borderBottom: "1px solid rgba(124,58,237,0.22)",
-        boxShadow: scrolled ? "0 4px 40px rgba(0,0,0,0.7)" : "none",
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="font-mono text-xs tracking-[0.22em] transition-colors duration-200"
-              style={{ color: "rgba(245,245,241,0.72)" }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.98)")
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.72)")
-              }
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        {/* Brand — right side */}
-        <div className="flex items-center gap-3 ml-auto">
-          <span
-            className="hidden sm:block font-cinzel text-sm tracking-[0.18em] font-bold"
-            style={{
-              background:
-                "linear-gradient(90deg, #F5F5F1 0%, rgba(200,180,255,0.95) 50%, #F5F5F1 100%)",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            BLACK FLAG SYSTEMS
-          </span>
-          <div
-            className="rounded-full overflow-hidden"
-            style={{
-              border: "1px solid rgba(124,58,237,0.45)",
-              boxShadow: "0 0 14px rgba(124,58,237,0.2)",
-            }}
-          >
-            <Image
-              src="/Skull & Cross Swords.png"
-              alt="Black Flag Systems"
-              width={40}
-              height={40}
-              priority
-              unoptimized
-            />
-          </div>
-        </div>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden ml-4 transition-colors duration-200"
-          style={{ color: "rgba(245,245,241,0.6)" }}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </div>
-
-      {/* Mobile dropdown */}
-      {menuOpen && (
-        <div
-          style={{
-            borderTop: "1px solid rgba(124,58,237,0.18)",
-            background: "rgba(5,5,5,0.98)",
-          }}
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="block px-6 py-4 font-mono text-xs tracking-[0.22em] transition-colors duration-200"
-              style={{ color: "rgba(245,245,241,0.55)" }}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-          <div className="px-6 py-4">
-            <button
-              className="block w-full text-center font-cinzel text-xs tracking-[0.2em] py-3 px-6"
-              style={{
-                border: "1px solid rgba(124,58,237,0.5)",
-                color: "rgba(245,245,241,0.9)",
-              }}
-              onClick={() => { setMenuOpen(false); onContact(); }}
-            >
-              BOARD NOW
-            </button>
-          </div>
-        </div>
-      )}
-    </nav>
-  );
-}
-
 // ── OpeningSalvo (Hero) ───────────────────────────────────────────────────────
-function OpeningSalvo({ onContact }: { onContact: () => void }) {
+function OpeningSalvo() {
+  const openContact = useContact();
   return (
     <section
       id="hero"
@@ -320,7 +156,7 @@ function OpeningSalvo({ onContact }: { onContact: () => void }) {
               animation: "blink 2.4s ease-in-out infinite",
             }}
           />
-          AI Automation & Digital Growth Agency
+          Digital Asset Management Company
           <div
             className="w-1.5 h-1.5 rounded-full"
             style={{
@@ -369,7 +205,7 @@ function OpeningSalvo({ onContact }: { onContact: () => void }) {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
-            onClick={onContact}
+            onClick={() => openContact()}
             className="group relative inline-flex items-center gap-2 font-cinzel text-sm tracking-[0.2em] font-bold px-10 py-4 transition-all duration-300"
             style={{
               background:
@@ -422,9 +258,7 @@ function OpeningSalvo({ onContact }: { onContact: () => void }) {
                 "linear-gradient(to bottom, transparent, rgba(124,58,237,0.4), transparent)",
             }}
           />
-          <span className="font-mono text-[10px] tracking-[0.3em]">
-            MAKE WAY
-          </span>
+          <span className="font-mono text-[10px] tracking-[0.3em]">MAKE WAY</span>
         </div>
       </div>
     </section>
@@ -664,66 +498,30 @@ function BountyBoard() {
   );
 }
 
-// ── ResourceAllocation (Pricing) ──────────────────────────────────────────────
-function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }) {
-  const tiers = [
+// ── Provisions (Scoping — replaces fixed pricing tiers) ────────────────────────
+function Provisions() {
+  const openContact = useContact();
+
+  const factors = [
     {
-      name: "RECON",
       icon: <Crosshair size={20} />,
-      price: "From $1,500",
-      period: "/month",
-      description: "For companies ready to weaponize their first automated revenue channel.",
-      features: [
-        "Automated lead generation pipeline",
-        "AI-powered email sequences",
-        "CRM integration & data sync",
-        "Monthly strategy session",
-        "Performance reporting dashboard",
-        "1 active campaign",
-      ],
-      cta: "BEGIN RECON",
-      highlight: false,
+      name: "SYSTEM",
+      detail: "Which systems you deploy",
     },
     {
-      name: "VANGUARD",
-      icon: <Sword size={20} />,
-      price: "From $3,000",
-      period: "/month",
-      badge: "MOST PLUNDERED",
-      description: "For growth-stage companies ready to dominate multiple channels simultaneously.",
-      features: [
-        "Everything in RECON",
-        "Multi-channel outreach systems",
-        "AI prospecting & targeting",
-        "Real-time analytics dashboard",
-        "Custom workflow builds",
-        "3 active campaigns",
-        "Priority response (4hr SLA)",
-        "Bi-weekly strategy sessions",
-      ],
-      cta: "TAKE COMMAND",
-      highlight: true,
+      icon: <Compass size={20} />,
+      name: "SCOPE",
+      detail: "Depth and scale of the work",
     },
     {
-      name: "ARCHITECT",
-      icon: <Skull size={20} />,
-      price: "Custom",
-      period: "engagement",
-      description: "Pick your weapons. Built for individuals who need 1 or 2 precision systems deployed — no full retainer required.",
-      features: [
-        "Automated Lead Funnel",
-        "Social Media Content Engine",
-        "Email & Notification Systems",
-        "CRM Pipeline Automation",
-        "Reputation & Review Management",
-        "AI Appointment Setter",
-        "Reporting & Analytics Dashboards",
-        "Missed Call Text-Back",
-        "AI Chat Assistant",
-        "Invoice & Payment Follow-Up",
-      ],
-      cta: "REQUEST INTEL",
-      highlight: false,
+      icon: <Anchor size={20} />,
+      name: "COMPLIANCE",
+      detail: "Regulatory & security requirements",
+    },
+    {
+      icon: <Wind size={20} />,
+      name: "URGENCY",
+      detail: "Speed of delivery",
     },
   ];
 
@@ -736,131 +534,88 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
           "linear-gradient(to bottom, #050505 0%, #120321 35%, #120321 65%, #050505 100%)",
       }}
     >
-      <div className="max-w-6xl mx-auto px-6">
-        <SectionLabel eyebrow="CHOOSE YOUR ENGAGEMENT" title="PROVISIONS" />
+      <div className="max-w-4xl mx-auto px-6">
+        <SectionLabel eyebrow="EVERY ENGAGEMENT IS SCOPED" title="PROVISIONS" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
-          {tiers.map((tier) => (
-            <div
-              key={tier.name}
-              className="relative p-8 flex flex-col h-full transition-all duration-300"
-              style={tier.highlight ? CARD_VANGUARD : CARD_BASE}
-            >
-              {/* Badge */}
-              {tier.badge && (
+        <div className="relative p-10 md:p-14" style={CARD_BASE}>
+          {/* Top rule */}
+          <div className="absolute top-0 inset-x-0 h-px" style={DIVIDER} />
+
+          {/* Statement */}
+          <p
+            className="font-sans text-lg md:text-xl text-center leading-relaxed mb-12 max-w-2xl mx-auto"
+            style={{ color: "rgba(245,245,241,0.82)" }}
+          >
+            No fixed price lists. Every engagement is built to the mission. What
+            you invest depends on the{" "}
+            <strong style={{ color: "#F5F5F1" }}>system</strong>,{" "}
+            <strong style={{ color: "#F5F5F1" }}>scope</strong>,{" "}
+            <strong style={{ color: "#F5F5F1" }}>compliance</strong> requirements,
+            and <strong style={{ color: "#F5F5F1" }}>urgency</strong> of delivery.
+          </p>
+
+          {/* Factor grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            {factors.map((f) => (
+              <div
+                key={f.name}
+                className="flex flex-col items-center text-center gap-3 p-5"
+                style={{
+                  border: "1px solid rgba(124,58,237,0.22)",
+                  background: "rgba(124,58,237,0.04)",
+                }}
+              >
                 <div
-                  className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 font-mono text-[10px] tracking-[0.3em] uppercase whitespace-nowrap"
+                  className="inline-flex items-center justify-center w-10 h-10"
                   style={{
-                    background:
-                      "linear-gradient(90deg, rgba(124,58,237,0.9), rgba(76,29,149,0.9))",
-                    border: "1px solid rgba(124,58,237,0.6)",
-                    color: "#F5F5F1",
-                    boxShadow: "0 0 20px rgba(124,58,237,0.4)",
+                    border: "1px solid rgba(124,58,237,0.35)",
+                    color: "rgba(124,58,237,0.85)",
                   }}
                 >
-                  {tier.badge}
+                  {f.icon}
                 </div>
-              )}
-
-              {/* Tier icon */}
-              <div
-                className="mb-4 flex items-center gap-2"
-                style={{
-                  color: tier.highlight
-                    ? "rgba(124,58,237,0.9)"
-                    : "rgba(245,245,241,0.3)",
-                }}
-              >
-                {tier.icon}
+                <div
+                  className="font-cinzel text-sm font-bold tracking-[0.18em]"
+                  style={METALLIC_TEXT}
+                >
+                  {f.name}
+                </div>
+                <div
+                  className="font-mono text-[10px] tracking-[0.12em] uppercase leading-relaxed"
+                  style={{ color: "rgba(245,245,241,0.6)" }}
+                >
+                  {f.detail}
+                </div>
               </div>
+            ))}
+          </div>
 
-              {/* Tier name */}
-              <h3
-                className="font-cinzel text-3xl font-black tracking-widest mb-2"
-                style={METALLIC_TEXT}
-              >
-                {tier.name}
-              </h3>
+          {/* CTA */}
+          <div className="text-center">
+            <button
+              onClick={() => openContact()}
+              className="group inline-flex items-center gap-2 font-cinzel text-sm tracking-[0.2em] font-bold px-10 py-4 transition-all duration-300"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(124,58,237,0.9) 0%, rgba(76,29,149,0.8) 100%)",
+                border: "1px solid rgba(124,58,237,0.7)",
+                boxShadow:
+                  "0 0 30px rgba(124,58,237,0.25), inset 0 1px 0 rgba(255,255,255,0.08)",
+                color: "#F5F5F1",
+                cursor: "pointer",
+              }}
+            >
+              <Sword size={14} />
+              REQUEST YOUR SCOPE
+              <ChevronRight
+                size={14}
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </button>
+          </div>
 
-              {/* Price */}
-              <div className="mb-6 pb-6" style={{ borderBottom: "1px solid rgba(124,58,237,0.18)" }}>
-                <span
-                  className="font-cinzel text-2xl font-bold"
-                  style={{ color: "rgba(245,245,241,0.85)" }}
-                >
-                  {tier.price}
-                </span>
-                <span
-                  className="font-mono text-xs ml-1"
-                  style={{ color: "rgba(245,245,241,0.62)" }}
-                >
-                  {tier.period}
-                </span>
-                <p
-                  className="font-sans text-sm mt-3 leading-relaxed"
-                  style={{ color: "rgba(245,245,241,0.72)" }}
-                >
-                  {tier.description}
-                </p>
-              </div>
-
-              {/* Features */}
-              <ul className="flex flex-col gap-3 mb-8 flex-1">
-                {tier.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-start gap-3 font-sans text-sm"
-                    style={{ color: "rgba(245,245,241,0.82)" }}
-                  >
-                    <Check
-                      size={14}
-                      className="mt-0.5 shrink-0"
-                      style={{ color: "rgba(124,58,237,0.8)" }}
-                    />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
-              <button
-                onClick={() => onContact(tier.name)}
-                className="block w-full text-center font-cinzel text-xs tracking-[0.22em] font-bold py-4 px-6 transition-all duration-200"
-                style={
-                  tier.highlight
-                    ? {
-                        background:
-                          "linear-gradient(135deg, rgba(124,58,237,0.85) 0%, rgba(76,29,149,0.75) 100%)",
-                        border: "1px solid rgba(124,58,237,0.6)",
-                        color: "#F5F5F1",
-                        boxShadow: "0 0 20px rgba(124,58,237,0.2)",
-                        cursor: "pointer",
-                      }
-                    : {
-                        border: "1px solid rgba(245,245,241,0.2)",
-                        color: "rgba(245,245,241,0.7)",
-                        cursor: "pointer",
-                      }
-                }
-                onMouseEnter={(e) => {
-                  if (!tier.highlight) {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.borderColor = "rgba(124,58,237,0.45)";
-                    el.style.color = "rgba(245,245,241,0.95)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!tier.highlight) {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.borderColor = "rgba(245,245,241,0.2)";
-                    el.style.color = "rgba(245,245,241,0.7)";
-                  }
-                }}
-              >
-                {tier.cta}
-              </button>
-            </div>
-          ))}
+          {/* Bottom rule */}
+          <div className="absolute bottom-0 inset-x-0 h-px" style={DIVIDER} />
         </div>
 
         {/* Fine print */}
@@ -875,202 +630,11 @@ function ResourceAllocation({ onContact }: { onContact: (tier: string) => void }
   );
 }
 
-// ── TheHorizon (Footer) ───────────────────────────────────────────────────────
-function TheHorizon({ onContact }: { onContact: () => void }) {
-  return (
-    <footer className="relative" style={{ borderTop: "1px solid rgba(124,58,237,0.15)" }}>
-      <div className="absolute top-0 inset-x-0 h-px" style={DIVIDER} />
-
-      {/* Deep fade from midnight to obsidian */}
-      <div
-        className="py-20 px-6"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(18,3,33,0.4) 0%, #050505 100%)",
-        }}
-      >
-        <div className="max-w-6xl mx-auto">
-          {/* Main footer row */}
-          <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-12 mb-16">
-            {/* Brand block */}
-            <div className="flex flex-col items-center md:items-start gap-4 max-w-xs">
-              <div className="flex items-center gap-3">
-                <div
-                  className="rounded-full overflow-hidden"
-                  style={{
-                    border: "1px solid rgba(124,58,237,0.35)",
-                    boxShadow: "0 0 12px rgba(124,58,237,0.15)",
-                  }}
-                >
-                  <Image
-                    src="/Skull & Cross Swords.png"
-                    alt="Black Flag Systems"
-                    width={36}
-                    height={36}
-                    unoptimized
-                  />
-                </div>
-                <span
-                  className="font-cinzel text-sm tracking-[0.18em] font-bold"
-                  style={METALLIC_TEXT}
-                >
-                  BLACK FLAG SYSTEMS
-                </span>
-              </div>
-              <p
-                className="font-sans text-sm text-center md:text-left leading-relaxed"
-                style={{ color: "rgba(245,245,241,0.65)" }}
-              >
-                AI Automation & Digital System Development.<br />
-                No quarter given on results.
-              </p>
-              <div
-                className="flex items-center gap-2 font-mono text-xs tracking-[0.18em] uppercase font-bold"
-                style={{ animation: "pulse-purple 2.4s ease-in-out infinite" }}
-              >
-                <span>★</span>
-                <span>Veteran Owned Company</span>
-              </div>
-            </div>
-
-            {/* Nav columns */}
-            <div className="flex gap-16">
-              <div>
-                <div
-                  className="font-mono text-[10px] tracking-[0.3em] uppercase mb-5"
-                  style={{ color: "rgba(124,58,237,0.88)" }}
-                >
-                  Navigation
-                </div>
-                {["Capabilities", "Results", "Provisions"].map((item) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="block font-sans text-sm mb-3 transition-colors duration-200"
-                    style={{ color: "rgba(245,245,241,0.68)" }}
-                    onMouseEnter={(e) =>
-                      ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.95)")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.68)")
-                    }
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-              <div>
-                <div
-                  className="font-mono text-[10px] tracking-[0.3em] uppercase mb-5"
-                  style={{ color: "rgba(124,58,237,0.88)" }}
-                >
-                  Contact
-                </div>
-                {["Hello@blackflagsystems.dev", "Schedule a Call"].map((item) => (
-                  <button
-                    key={item}
-                    onClick={onContact}
-                    className="block font-sans text-sm mb-3 transition-colors duration-200 text-left"
-                    style={{ color: "rgba(245,245,241,0.68)", cursor: "pointer", background: "none", border: "none", padding: 0 }}
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(245,245,241,0.95)")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(245,245,241,0.68)")
-                    }
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div style={DIVIDER} />
-
-          {/* Bottom bar */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-8">
-            {/* System Status Lantern */}
-            <div className="flex items-center gap-3">
-              <div
-                className="w-2 h-2 rounded-full"
-                style={{
-                  background: "#7c3aed",
-                  boxShadow:
-                    "0 0 6px rgba(124,58,237,0.9), 0 0 14px rgba(124,58,237,0.5)",
-                  animation: "blink 2.4s ease-in-out infinite",
-                }}
-              />
-              <span
-                className="font-mono text-[11px] tracking-[0.25em] uppercase"
-                style={{ color: "rgba(124,58,237,0.95)" }}
-              >
-                SYSTEM STATUS: OPERATIONAL
-              </span>
-              <div
-                className="w-px h-4 mx-1"
-                style={{ background: "rgba(124,58,237,0.25)" }}
-              />
-              <span
-                className="font-cinzel text-[11px] tracking-[0.2em] font-bold"
-                style={{ color: "rgba(245,245,241,0.78)" }}
-              >
-                THE WIND IS AT OUR BACK.
-              </span>
-            </div>
-
-            {/* Copyright + Privacy */}
-            <div className="flex items-center gap-4">
-              <span
-                className="font-mono text-[11px] tracking-[0.18em]"
-                style={{ color: "rgba(245,245,241,0.58)" }}
-              >
-                © {new Date().getFullYear()} BLACK FLAG SYSTEMS. ALL RIGHTS RESERVED.
-              </span>
-              <span style={{ color: "rgba(124,58,237,0.55)" }}>·</span>
-              <a
-                href="/privacy"
-                className="font-mono text-[11px] tracking-[0.18em] transition-colors duration-200"
-                style={{ color: "rgba(245,245,241,0.58)" }}
-                onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.95)")
-                }
-                onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.color = "rgba(245,245,241,0.58)")
-                }
-              >
-                PRIVACY POLICY
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function Page() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalTier, setModalTier] = useState("");
-
-  const openModal = (tier = "") => {
-    setModalTier(tier);
-    setModalOpen(true);
-  };
-
   return (
-    <main style={{ background: "#050505" }}>
-      <ContactModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        defaultTier={modalTier}
-      />
-
-      <CommandBridgeNav onContact={() => openModal()} />
-      <OpeningSalvo onContact={() => openModal()} />
+    <SiteShell>
+      <OpeningSalvo />
 
       <div className="max-w-5xl mx-auto px-6">
         <div style={DIVIDER} />
@@ -1088,9 +652,7 @@ export default function Page() {
         <div style={DIVIDER} />
       </div>
 
-      <ResourceAllocation onContact={(tier) => openModal(tier)} />
-
-      <TheHorizon onContact={() => openModal()} />
-    </main>
+      <Provisions />
+    </SiteShell>
   );
 }

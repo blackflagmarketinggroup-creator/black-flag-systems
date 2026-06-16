@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Black Flag Systems — No Quarter Given. Total Market Dominance.",
   description:
-    "AI Automation & Digital Growth Agency. Building the autonomous systems that hunt and scale your revenue.",
+    "Digital Asset Management Company. Building the autonomous systems that hunt and scale your revenue across SEO, social, automation, and web.",
   openGraph: {
     title: "Black Flag Systems",
     description: "No Quarter Given. Total Market Dominance.",
